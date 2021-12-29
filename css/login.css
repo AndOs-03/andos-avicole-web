@@ -1,0 +1,16 @@
+
+body{
+    background:url('../assets/images/cover.jpg');
+    background-size: cover;
+}
+
+/* Formulaire */
+.row{
+padding-top: 5%;
+padding-bottom: 10%;
+}
+
+
+.liens_gras{
+    font-weight: bold;
+}

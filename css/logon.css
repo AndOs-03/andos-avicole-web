@@ -1,0 +1,20 @@
+
+body{
+    background:url('../assets/images/cover.jpg');
+    background-size: cover;
+}
+
+/* Formulaire */
+.row{
+padding-bottom: 7%;
+}
+
+.liens_gras{
+    font-weight: bold;
+}
+
+
+/* Style des messages d'alertes */
+.style_msg_alert{
+    /* padding-top: 50%; */
+}
