@@ -24,12 +24,8 @@ function verifiePhone($var){
  * @return boolean
  */
 function verifiePass($var) {
-    $pattern = '/^.{6,}$/';
-    if(preg_match($pattern, $var)){
-        return true;
-    } else {
-        return false;
-    }
+    $pattern = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/';
+    return preg_match($pattern, $var);
 }
 
 /**
@@ -46,7 +42,7 @@ function verifieEmail($var){
  * @param null
  * @return string
  */
-function get_ip(){
+function getIp(){
     if ( isset ( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
     }
