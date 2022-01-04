@@ -12,7 +12,7 @@
             <li class="nav-item dropdown d-none d-sm-inline-block">
                 <a class="nav-link" data-toggle="dropdown" href="#">Fichier</a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-                    <a href="../bd/deconnexion.php" class="dropdown-item">
+                    <a href="deconnexion.php" class="dropdown-item">
                         <i class="fas fa-power-off mr-2"></i> Se déconnecter
                     </a>
                     <div class=" dropdown-divider">
@@ -118,8 +118,8 @@
 
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <a href="../pages/profile.php" class="btn btn-default btn-flat">Mon profile</a>
-                        <a href="../bd/deconnexion.php"
+                        <a href="index.php?page=profile" class="btn btn-default btn-flat">Mon profile</a>
+                        <a href="controllers/deconnexion.php?logout=true"
                            class="btn btn-default btn-flat float-right">Déconnexion</a>
                     </li>
                 </ul>
