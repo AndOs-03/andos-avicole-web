@@ -5,6 +5,7 @@ session_start();
 include_once 'config/config.php';
 include_once 'config/db.php';
 include_once 'functions/functions.php';
+include_once 'models/Users.php';
 
 // DEFINITION DES VARIABLES DE SESSION
 
