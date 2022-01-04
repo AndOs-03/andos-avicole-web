@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index.php?page=dashbord" class="brand-link">
+  <a href="index.php" class="brand-link">
     <img src="assets/images/logo.png" alt="AdminLTE Logo"
          class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">AndOs Avicole</span>
@@ -29,7 +29,7 @@
            with font-awesome or any other icon font library -->
 
         <li class="nav-item menu-open">
-          <a href="index.php?page=dashbord" class="nav-link">
+          <a href="index.php" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Tableau de bord</p>
           </a>
@@ -96,39 +96,27 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-folder"></i>
             <p>
-              Gestion des clients
+              Gestion des bâtiments
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../pages/client_gestion.php" class="nav-link">
+              <a href="index.php?page=batiments" class="nav-link">
                 <i class="fas fa-users nav-icon"></i>
-                <p>Liste des clients</p>
+                <p>Bâtiments</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../pages/client_notification.php" class="nav-link">
+              <a href="index.php?page=produit_entretien" class="nav-link">
                 <i class="fas fa-bell nav-icon"></i>
-                <p>Notifications relances</p>
+                <p>Produits entretien</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../pages/situation_gestion.php" class="nav-link">
+              <a href="index.php?page=achat_produit" class="nav-link">
                 <i class="fas fa-money-bill-alt nav-icon"></i>
-                <p>Honoraires client</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../pages/collecte_document.php" class="nav-link">
-                <i class="fas fa-folder-open nav-icon"></i>
-                <p>Collecte documents</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../pages/declaration_client.php" class="nav-link">
-                <i class="nav-icon fas fa-plus-circle"></i>
-                <p>Déclaration client</p>
+                <p>Achat de produits</p>
               </a>
             </li>
           </ul>
@@ -292,7 +280,7 @@
   </div>
 </div>
 
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
 
 <script type="text/javascript">
   $(".link-etat-choix-date").on('click', function (e) {
