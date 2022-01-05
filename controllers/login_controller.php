@@ -1,8 +1,8 @@
 <?php
 
 // Vérification des cookies
-if (isset($_COOKIE['resterConnecter'])) {
-    $email = $_COOKIE['resterConnecter'];
+if (isset($_COOKIE['avicoleUserConnecte'])) {
+    $email = $_COOKIE['avicoleUserConnecte'];
     $userBdd = Users::getByEmail($email);
 
     $userBdd['pwd'] = null;
@@ -22,7 +22,7 @@ if (isset($_POST['btn_login'])) {
 
     $loginId = strSecur($_POST['loginId']);
     $password = strSecur($_POST['password']);
-    $resterConnecter = $_POST['resterConnecter'];
+    $resterConnecter = $_POST['avicoleUserConnecte'];
 
     $userBdd = Users::getByEmail($loginId);
     if ($userBdd['email'] == $loginId && password_verify($password, $userBdd['pwd'])) {
@@ -41,7 +41,7 @@ if (isset($_POST['btn_login'])) {
 
             // Définition des cookies
             if (isset($resterConnecter)) {
-                setcookie('resterConnecter', $userBdd['email'], time() + 60 * 60 * 24 * 30, "/", null, false, true);
+                setcookie('avicoleUserConnecte', $userBdd['email'], time() + 60 * 60 * 24 * 30, "/", null, false, true);
             }
         }
     }

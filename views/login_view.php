@@ -61,7 +61,7 @@
         <div class="row">
           <div class="col-6">
             <div class="icheck-primary">
-              <input type="checkbox" name="resterConnecter" id="resterConnecter">
+              <input type="checkbox" name="avicoleUserConnecte" id="avicoleUserConnecte">
               <label for="resterConnecter" style="font-size: 13px">
                 Rester connecter
               </label>
