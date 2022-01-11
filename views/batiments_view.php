@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="index.php?page=home">Accueil</a></li>
                             <li class="breadcrumb-item active">bâtiments</li>
                         </ol>
                     </div>
@@ -164,52 +164,54 @@
                             </div>
                             <!-- /.card-header -->
 
-                            <div class="card-body">
-                                <table id="dg_1" class="table table-responsive-lg">
-                                    <thead>
+                            <div class="card-body p-0">
+                              <div class="table-responsive">
+                                <table id="dg_1" class="table table-striped">
+                                  <thead class="thead-light">
                                     <tr>
-                                        <th>N°</th>
-                                        <th>Libellé</th>
-                                        <th>Capacité</th>
-                                        <th>Type</th>
-                                        <th>Stock Actuel</th>
-                                        <th>Actions</th>
+                                      <th>N°</th>
+                                      <th>Libellé</th>
+                                      <th>Capacité</th>
+                                      <th>Type</th>
+                                      <th>Stock Actuel</th>
+                                      <th class="text-right">Actions</th>
                                     </tr>
-                                    </thead>
-                                    <tbody class="table-data-body">
-                                    <?php
-                                        for ($j = 0; $j < count($batiments); $j++) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo ($j+1); ?></td>
-                                                <td> <?php echo htmlspecialchars($batiments[$j]['libelle']); ?> </td>
-                                                <td> <?php echo htmlspecialchars($batiments[$j]['capacite']); ?> </td>
-                                                <td> <?php echo htmlspecialchars($batiments[$j]['type']); ?> </td>
-                                                <td> <?php echo htmlspecialchars($batiments[$j]['stock_actuel']); ?> </td>
+                                  </thead>
+                                  <tbody class="table-data-body">
+                                  <?php
+                                  for ($j = 0; $j < count($batiments); $j++) {
+                                      ?>
+                                    <tr>
+                                      <td><?php echo ($j+1); ?></td>
+                                      <td> <?php echo htmlspecialchars($batiments[$j]['libelle']); ?> </td>
+                                      <td> <?php echo htmlspecialchars($batiments[$j]['capacite']); ?> </td>
+                                      <td> <?php echo htmlspecialchars($batiments[$j]['type']); ?> </td>
+                                      <td> <?php echo htmlspecialchars($batiments[$j]['stock_actuel']); ?> </td>
 
-                                                <!-- ACTIONS -->
-                                                <td>
-                                                    <div class="btn-group-horizontal">
-                                                        <a class="btn btn-info link-update-button"
-                                                           href="#" data-ligne-id="<?= $batiments[$j]['id'] ?>"
-                                                           data-bs-toggle="tooltip" title="Modifier"><span class="fas fa-edit"></span>
-                                                        </a>
-                                                        <a class="btn btn-danger link-delete-button"
-                                                           href="#" data-ligne-id="<?= $batiments[$j]['id'] ?>" data-ligne-nom="<?= $batiments[$j]['libelle'] ?>"
-                                                           data-bs-toggle="tooltip" title="Supprimer le bâtiment"><span class="fas fa-trash"></span>
-                                                        </a>
-                                                        <a class="btn btn-warning link-close-campagne-button"
-                                                           href="#" data-ligne-id="<?= $batiments[$j]['id'] ?>" data-ligne-nom="<?= $batiments[$j]['libelle'] ?>"
-                                                           data-bs-toggle="tooltip" title="Fermer la campagne actuelle pour le bâtiment"><span class="fas fa-times"></span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                        }
-                                    ?>
-                                    </tbody>
+                                      <!-- ACTIONS -->
+                                      <td class="text-right">
+                                        <div class="btn-group-horizontal">
+                                          <a class="btn btn-info link-update-button"
+                                             href="#" data-ligne-id="<?= $batiments[$j]['id'] ?>"
+                                             data-bs-toggle="tooltip" title="Modifier"><span class="fas fa-edit"></span>
+                                          </a>
+                                          <a class="btn btn-danger link-delete-button"
+                                             href="#" data-ligne-id="<?= $batiments[$j]['id'] ?>" data-ligne-nom="<?= $batiments[$j]['libelle'] ?>"
+                                             data-bs-toggle="tooltip" title="Supprimer le bâtiment"><span class="fas fa-trash"></span>
+                                          </a>
+                                          <a class="btn btn-warning link-close-campagne-button"
+                                             href="#" data-ligne-id="<?= $batiments[$j]['id'] ?>" data-ligne-nom="<?= $batiments[$j]['libelle'] ?>"
+                                             data-bs-toggle="tooltip" title="Fermer la campagne actuelle pour le bâtiment"><span class="fas fa-times"></span>
+                                          </a>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                      <?php
+                                  }
+                                  ?>
+                                  </tbody>
                                 </table>
+                              </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -470,11 +472,7 @@
     }
 
     if (submit === true) {
-      if ($('.flash').hasClass('alert-success')) {
-        $('.flash').removeClass('alert-success');
-      } else if ($('.flash').hasClass('alert-danger')) {
-        $('.flash').removeClass('alert-danger');
-      }
+      initializeFlash();
       $('.flash').addClass('alert-info');
       $('.flash').html('<i class="fas fa-cog fa-spin"></i> Création...').fadeIn(300);
 
@@ -522,7 +520,8 @@
             });
           }
           if (donnee['success'] === 'non') {
-            $('.flash').removeClass('alert-info').addClass('alert-danger');
+            initializeFlash();
+            $('.flash').addClass('alert-danger');
             $('.flash').html('<i class="fas fa-exclamation-circle"></i> ' + donnee['message'])
                 .fadeIn(300).delay(2500).fadeOut(300);
           }
