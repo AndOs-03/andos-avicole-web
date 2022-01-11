@@ -12,7 +12,7 @@ if (isset($_GET['logout'])) {
     Users::updateStatusFalse($id);
 
     //Fermer la session de l'utilisateur connecté sur l'ordinateur
-    setcookie('resterCntAvicole', '', time() - 3600, '/');
+    setcookie('avicoleUserConnecte', '', time() - 3600, '/');
     session_destroy();
     header('Location: ../index.php');
 }

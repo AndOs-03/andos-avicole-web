@@ -8,7 +8,6 @@
 
   <!-- Mes fichiers style CSS -->
   <link rel="stylesheet" href="css/login.css">
-  <link rel="stylesheet" href="css/main.css">
 </head>
 
 
@@ -88,6 +87,18 @@
 
 <!-- Mes fichier JS -->
 <script type="text/javascript">
+  function initializeFlash() {
+    if ($('.flash').hasClass('alert-success')) {
+      $('.flash').removeClass('alert-success');
+    } else if ($('.flash').hasClass('alert-danger')) {
+      $('.flash').removeClass('alert-danger');
+    } else if ($('.flash').hasClass('alert-warning')) {
+      $('.flash').removeClass('alert-warning');
+    } else if ($('.flash').hasClass('alert-info')) {
+      $('.flash').removeClass('alert-info');
+    }
+  }
+
   var formValide = false;
 
   $('#loginId').on('keyup', function () {
@@ -126,6 +137,8 @@
 
   $('#login_form').on('submit', function (e) {
     e.preventDefault();
+    initializeFlash();
+
     if (formValide === true) {
       if ($('.flash').hasClass('alert-success')) {
         $('.flash').removeClass('alert-success');

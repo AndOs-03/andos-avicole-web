@@ -50,45 +50,6 @@
                 <p>Liste des clients</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="../pages/etats/EtatListeConsultants.php" class="nav-link" target="_blank">
-                <i class="fas fa-file nav-icon"></i>
-                <p>Liste des consultants</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../pages/etats/EtatListeRapports.php" class="nav-link" target="_blank">
-                <i class="fas fa-file nav-icon"></i>
-                <p>Liste des rapports consultant</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link link-etat-choix-date"
-                 data-lien-page="EtatDeclarationsClient.php">
-                <i class="fas fa-file nav-icon"></i>
-                <p>États déclarations client</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link link-etat-choix-date"
-                 data-lien-page="EtatDeclarationsNonPayees.php">
-                <i class="fas fa-file nav-icon"></i>
-                <p>États déclarations non payées</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../pages/etats/EtatMensualiteClient.php" class="nav-link" target="_blank">
-                <i class="fas fa-file nav-icon"></i>
-                <p>Liste des mensualités</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link link-etat-choix-date"
-                 data-lien-page="EtatDocumentCollectes.php">
-                <i class="fas fa-file nav-icon"></i>
-                <p>États documents collectés</p>
-              </a>
-            </li>
           </ul>
         </li>
 
@@ -103,19 +64,19 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="index.php?page=batiments" class="nav-link">
-                <i class="fas fa-users nav-icon"></i>
+                <i class="fas fa-home nav-icon"></i>
                 <p>Bâtiments</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="index.php?page=produit_entretien" class="nav-link">
-                <i class="fas fa-bell nav-icon"></i>
+                <i class="fas fa-hand-point-right nav-icon"></i>
                 <p>Produits entretien</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="index.php?page=achat_produit" class="nav-link">
-                <i class="fas fa-money-bill-alt nav-icon"></i>
+                <i class="fas fa-hand-point-right nav-icon"></i>
                 <p>Achat de produits</p>
               </a>
             </li>
@@ -126,33 +87,51 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-folder"></i>
             <p>
-              Gestion consultants
+              Gestion des aliments
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../pages/consultants.php" class="nav-link">
-                <i class="nav-icon fas fa-user-tie"></i>
-                <p>Liste des consultants</p>
+              <a href="index.php?page=aliments" class="nav-link">
+                <i class="nav-icon fas fa-cookie-bite"></i>
+                <p>Aliments</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../pages/activites_consultant.php" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
-                <p>Activités</p>
+              <a href="index.php?page=type_aliment" class="nav-link">
+                <i class="nav-icon fas fa-cookie-bite"></i>
+                <p>Types aliments</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../pages/rapport_consultant.php" class="nav-link">
-                <i class="nav-icon fas fa-book-open"></i>
-                <p>Rapport</p>
+              <a href="index.php?page=achat_aliments" class="nav-link">
+                <i class="nav-icon fas fa-cookie-bite"></i>
+                <p>Achat d'aliments</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-folder"></i>
+            <p>
+              Vaccinations
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="index.php?page=medicaments" class="nav-link">
+                <i class="nav-icon fas fa-capsules"></i>
+                <p>Médicaments</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../pages/taches_consultant.php" class="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
-                <p>Tâches</p>
+              <a href="index.php?page=traitements" class="nav-link">
+                <i class="nav-icon fas fa-stethoscope"></i>
+                <p>Traitements</p>
               </a>
             </li>
           </ul>

@@ -2,9 +2,9 @@
 <html lang="fr">
 
 <head>
-    <?php include_once 'includes/head.php' ?>
   <title>AndOs Avicole | Tableau de bord</title>
 
+  <?php include_once 'includes/head.php' ?>
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
@@ -18,8 +18,8 @@
   </div>
 
     <?php
-    include_once 'views/includes/header.php';
-    include_once 'views/includes/main_menu.php';
+      include_once 'views/includes/header.php';
+      include_once 'views/includes/main_menu.php';
     ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -131,9 +131,6 @@
 <!--FOOTER-->
 <?php
 include_once 'includes/footer.php';
-
-// Script js par defaut
-//include("../php/script_js.php");
 ?>
 
 

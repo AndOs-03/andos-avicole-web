@@ -4,12 +4,9 @@
 <head>
   <title>AndOs Avicole | Inscription</title>
 
-    <?php include_once 'includes/head.php' ?>
+  <?php include_once 'includes/head.php' ?>
   <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
-  <!-- BS Stepper -->
   <link rel="stylesheet" href="plugins/bs-stepper/css/bs-stepper.min.css">
-
-  <!-- Mes fichiers style CSS -->
   <link rel="stylesheet" href="css/logon.css">
 </head>
 
@@ -223,6 +220,17 @@
 <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
 
 <script type="text/javascript">
+  function initializeFlash() {
+    if ($('.flash').hasClass('alert-success')) {
+      $('.flash').removeClass('alert-success');
+    } else if ($('.flash').hasClass('alert-danger')) {
+      $('.flash').removeClass('alert-danger');
+    } else if ($('.flash').hasClass('alert-warning')) {
+      $('.flash').removeClass('alert-warning');
+    } else if ($('.flash').hasClass('alert-info')) {
+      $('.flash').removeClass('alert-info');
+    }
+  }
   // BS-Stepper Init
   document.addEventListener('DOMContentLoaded', function () {
     window.stepper = new Stepper(document.querySelector('.bs-stepper'))
@@ -338,6 +346,7 @@
         var method = form.prop('method');
         var url = form.prop('action');
 
+        initializeFlash();
         $.ajax({
           type: method,
           data: form.serialize() + "&btn_signin=" + true,
