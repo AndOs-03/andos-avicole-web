@@ -239,3 +239,26 @@ if (isset($_GET['getAll'])) {
         ]);
     }
 }
+
+// Récupération des info de la dernière ligne
+if (isset($_GET['idLast'])) {
+    include('../functions/functions.php');
+    include('../config/config.php');
+    include('../config/db.php');
+    include('../models/Batiments.php');
+
+    $batiment = Batiments::getLast();
+
+    if ($batiment) {
+        $total = Batiments::getCount();
+        echo json_encode([
+            'batiment' => $batiment,
+            'total' => $total
+        ]);
+    }
+    else {
+        echo json_encode([
+            'batiment' => 'null'
+        ]);
+    }
+}

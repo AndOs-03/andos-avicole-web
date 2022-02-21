@@ -61,7 +61,7 @@
           <div class="col-6">
             <div class="icheck-primary">
               <input type="checkbox" name="avicoleUserConnecte" id="avicoleUserConnecte">
-              <label for="resterConnecter" style="font-size: 13px">
+              <label for="avicoleUserConnecte" style="font-size: 13px">
                 Rester connecter
               </label>
             </div>
@@ -140,11 +140,6 @@
     initializeFlash();
 
     if (formValide === true) {
-      if ($('.flash').hasClass('alert-success')) {
-        $('.flash').removeClass('alert-success');
-      } else if ($('.flash').hasClass('alert-danger')) {
-        $('.flash').removeClass('alert-danger');
-      }
       $('.flash').addClass('alert-info');
       $('.flash').html('<i class="fas fa-cog fa-spin"></i> Authentification...').fadeIn(300);
 
@@ -163,18 +158,20 @@
             $('#passwordHelp').html("");
             $('#loginIdHelp').addClass('invisible');
 
-            $('.flash').removeClass('alert-info').addClass('alert-success');
+            initializeFlash();
+            $('.flash').addClass('alert-success');
             $('.flash').html('<i class="fas fa-spinner fa-spin"></i> Connexion établie, redirection...')
-            .fadeIn(300).delay(2500).fadeOut(300);
+              .fadeIn(300).delay(2500).fadeOut(300);
             window.location.href = "index.php?page=home";
           }
           else {
             $('#loginIdHelp').html(donnee['erreur']);
             $('#loginIdHelp').removeClass('invisible');
 
-            $('.flash').removeClass('alert-info').addClass('alert-danger');
+            initializeFlash();
+            $('.flash').addClass('alert-danger');
             $('.flash').html('<i class="fas fa-exclamation-circle"></i> ' + donnee['erreur'])
-            .fadeIn(300).delay(2500).fadeOut(300);
+              .fadeIn(300).delay(2500).fadeOut(300);
           }
         }
       });

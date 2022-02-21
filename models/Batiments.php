@@ -10,11 +10,6 @@ class Batiments
     public $capacite;
     public $type;
     public $stockActuel;
-    public $tel;
-    public $typeCompte;
-    public $dateCnx;
-    public $connected;
-    public $bloqued;
 
     /**
      * Batiments constructor.
@@ -50,6 +45,19 @@ class Batiments
         return $req->fetchAll();
     }
 
+    /**
+     * Renvoi la dernière ligne.
+     *
+     * @return mixed
+     */
+    static function getLast()
+    {
+        global $db;
+        $req = $db->prepare("SELECT * FROM batiments ORDER BY id DESC LIMIT 1");
+        $req->execute([]);
+        return $req->fetch();
+    }
+
 
     /**
      * Méthode pour récupérer un bâtiment en fonction de son ID.
@@ -66,7 +74,7 @@ class Batiments
     }
 
     /**
-     * Méthode pour récupérer un bâtiment en fonction de son libellé
+     * Méthode pour récupérer un bâtiment en fonction de son libellé.
      *
      * @param $libelle
      * @return mixed
@@ -77,6 +85,19 @@ class Batiments
         $req = $db->prepare("SELECT * FROM batiments WHERE libelle = ?");
         $req->execute([$libelle]);
         return $req->fetch();
+    }
+
+    /**
+     * Renvois le nombre total de bâtiments.
+
+     * @return int
+    */
+    static function getCount()
+    {
+        global $db;
+        $req = $db->prepare('SELECT COUNT(*) FROM batiments');
+        $req->execute([]);
+        return $req->rowCount();
     }
 
     /**

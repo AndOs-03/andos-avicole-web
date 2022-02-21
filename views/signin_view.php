@@ -334,11 +334,7 @@
       }
 
       if (goToNext === true) {
-        if ($('.flash').hasClass('alert-success')) {
-          $('.flash').removeClass('alert-success');
-        } else if ($('.flash').hasClass('alert-danger')) {
-          $('.flash').removeClass('alert-danger');
-        }
+        initializeFlash();
         $('.flash').addClass('alert-info');
         $('.flash').html('<i class="fas fa-cog fa-spin"></i> Inscription...').fadeIn(300);
 
@@ -363,12 +359,20 @@
               .fadeIn(300).delay(2500).fadeOut(300);
             }
             if (donnee['success'] === 'true') {
+              $('#nomPrenom').html("");
+              $('#email').html("");
+              $('#tel').html("");
+              $('#userName').html("");
+              $('#password').html("");
+              $('#confPassword').html("");
+
               $('#nomPrenomHelp').html("");
               $('#emailHelp').html("");
               $('#telHelp').html("");
               $('#userNameHelp').html("");
               $('#passwordHelp').html("");
               $('#confPasswordHelp').html("");
+
               $('#nomPrenomHelp').addClass('invisible');
               $('#emailHelp').addClass('invisible');
               $('#telHelp').addClass('invisible');
@@ -377,8 +381,8 @@
               $('#confPasswordHelp').addClass('invisible');
 
               $('.flash').removeClass('alert-info').addClass('alert-success');
-              $('.flash').html('<i class="fas fa-spinner fa-spin"></i> Compte crée, redirection...')
-              .fadeIn(300).delay(2500).fadeOut(300);
+              $('.flash').html('<i class="fas fa-check"></i> Compte crée avec succès')
+                .fadeIn(300).delay(2500).fadeOut(300);
             }
             if (donnee['success'] === 'non') {
               $('.flash').removeClass('alert-info').addClass('alert-danger');

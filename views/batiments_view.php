@@ -182,11 +182,11 @@
                                   for ($j = 0; $j < count($batiments); $j++) {
                                       ?>
                                     <tr>
-                                      <td><?php echo ($j+1); ?></td>
-                                      <td> <?php echo htmlspecialchars($batiments[$j]['libelle']); ?> </td>
-                                      <td> <?php echo htmlspecialchars($batiments[$j]['capacite']); ?> </td>
-                                      <td> <?php echo htmlspecialchars($batiments[$j]['type']); ?> </td>
-                                      <td> <?php echo htmlspecialchars($batiments[$j]['stock_actuel']); ?> </td>
+                                      <td><?= ($j+1); ?></td>
+                                      <td><?= $batiments[$j]['libelle']; ?></td>
+                                      <td><?= $batiments[$j]['capacite']; ?></td>
+                                      <td><?= $batiments[$j]['type']; ?></td>
+                                      <td><?= $batiments[$j]['stock_actuel']; ?></td>
 
                                       <!-- ACTIONS -->
                                       <td class="text-right">
@@ -372,8 +372,9 @@
     }
   }
 
-  $(".link-delete-button").on('click', function (e) {
-    e.preventDefault();
+  let currentLine = undefined;
+  $(".table-data-body").on("click", ".link-delete-button",  function () {
+    currentLine = $(this).parent().parent().parent();
     var id = $(this).data('ligne-id');
     var nom = $(this).data('ligne-nom');
     $(".delecte-msg-body").html("Etes-vous sur de vouloir supprimer le bâtiment : " + nom + " ?");
@@ -381,7 +382,7 @@
     $("#deleteModal1").modal('toggle');
   });
 
-  $(".link-modal-delete-ligne").on('click', function (e) {
+  $(".link-modal-delete-ligne").click(function (e) {
     e.preventDefault();
     initializeFlash();
 
@@ -393,34 +394,28 @@
 
     $.ajax({
       type: "GET",
-      data: "&idSuppr=" + id,
+      data: "idSuppr=" + id,
       url: "controllers/batiments_controller.php",
       success: function (result) {
         donnee = JSON.parse(result);
         if (donnee['success'] === 'oui') {
-          $('.flash').removeClass('alert-info').addClass('alert-success');
+          $(currentLine).fadeOut("fast", function (){
+            $(currentLine).remove();
+          });
+          initializeFlash();
+          $('.flash').addClass('alert-success');
           $('.flash').html('<i class="fas fa-check"></i> ' + donnee['message'])
             .fadeIn(300).delay(2500).fadeOut(300);
-
-          $.ajax({
-            type: "GET",
-            data: "getAll=" + true,
-            url: "controllers/batiments_controller.php",
-            success: function (result) {
-              donnee = JSON.parse(result);
-              if (donnee['success'] === 'oui') {
-                $('.table-data-body').html(donnee['batiment']);
-              }
-            }
-          });
         }
         else if (donnee['success'] === 'non') {
-          $('.flash').removeClass('alert-info').addClass('alert-danger');
+          initializeFlash();
+          $('.flash').addClass('alert-danger');
           $('.flash').html('<i class="fas fa-exclamation-circle"></i> ' + donnee['erreur'])
             .fadeIn(300).delay(2500).fadeOut(300);
         }
         else {
-          $('.flash').removeClass('alert-info').addClass('alert-danger');
+          initializeFlash();
+          $('.flash').addClass('alert-danger');
           $('.flash').html('<i class="fas fa-exclamation-circle"></i> Erreur inconnue')
             .fadeIn(300).delay(2500).fadeOut(300);
         }
@@ -503,18 +498,41 @@
             $('#typeHelp').html("").addClass('invisible');
             $('#capaciteHelp').html("").addClass('invisible');
 
-            $('.flash').removeClass('alert-info').addClass('alert-success');
+            initializeFlash();
+            $('.flash').addClass('alert-success');
             $('.flash').html('<i class="fas fa-check"></i> ' + donnee['message'])
                 .fadeIn(300).delay(2500).fadeOut(300);
 
+            // Ajout de la ligne ajoutée
             $.ajax({
               type: "GET",
-              data: "getAll=" + true,
+              data: "idLast=" + true,
               url: "controllers/batiments_controller.php",
               success: function (result) {
                 donnee = JSON.parse(result);
-                if (donnee['success'] === 'oui') {
-                  $('.table-data-body').html(donnee['batiment']);
+                if (donnee['batiment'] !== 'null') {
+                    let batiment = donnee['batiment'];
+                    let total = donnee['total'];
+                    let newLine =
+                      '<tr>' +
+                        '<td>' + total + '</td>' +
+                        '<td>' + batiment['libelle'] + '</td>' +
+                        '<td>' + batiment['capacite'] + '</td>' +
+                        '<td>' + batiment['type'] + '</td>' +
+                        '<td>' + batiment['stock_actuel'] + '</td>' +
+                        '<td class="text-right">' +
+                          '<div class="btn-group-horizontal">' +
+                            '<a class="btn btn-info link-update-button mr-1" href="#" ' +
+                              'data-ligne-id="'+batiment['id']+'" data-bs-toggle="tooltip" title="Modifier">' +
+                              '<span class="fas fa-edit"></span></a>' +
+                            '<a class="btn btn-danger link-delete-button mr-1" href="#" ' +
+                              'data-ligne-id="'+batiment['id']+'" data-ligne-nom="'+batiment['libelle']+'" ' +
+                              'data-bs-toggle="tooltip" title="Supprimer le bâtiment"><span class="fas fa-trash"></span></a>' +
+                            '<a class="btn btn-warning link-close-campagne-button" href="#" ' +
+                              'data-ligne-id="'+batiment['id']+'" data-ligne-nom="'+batiment['libelle']+'" ' +
+                              'data-bs-toggle="tooltip" title="Fermer la campagne actuelle pour le bâtiment"><span class="fas fa-times"></span></a>' +
+                      '</div></td></tr>';
+                  $(".table-data-body").append(newLine);
                 }
               }
             });
@@ -533,7 +551,8 @@
             $('#typeHelp').removeClass('invisible');
             $('#capaciteHelp').removeClass('invisible');
 
-            $('.flash').removeClass('alert-info').addClass('alert-danger');
+            initializeFlash();
+            $('.flash').addClass('alert-danger');
             $('.flash').html('<i class="fas fa-exclamation-circle"></i> Vérifiez les champs')
                 .fadeIn(300).delay(2500).fadeOut(300);
           }
@@ -542,8 +561,8 @@
     }
   });
 
-  $(".link-update-button").on('click', function (e) {
-    e.preventDefault();
+  $(".table-data-body").on("click", ".link-update-button",  function () {
+    currentLine = $(this).parent().parent().parent();
     var id = $(this).data('ligne-id');
     $.ajax({
       method: "GET",
@@ -610,11 +629,7 @@
     }
 
     if (submit === true) {
-      if ($('.flash').hasClass('alert-success')) {
-        $('.flash').removeClass('alert-success');
-      } else if ($('.flash').hasClass('alert-danger')) {
-        $('.flash').removeClass('alert-danger');
-      }
+      initializeFlash();
       $('.flash').addClass('alert-info');
       $('.flash').html('<i class="fas fa-cog fa-spin"></i> Modification...').fadeIn(300);
 
@@ -633,8 +648,10 @@
             $('#libelleHelpUpdate').html(donnee['message']);
             $('#libelleHelpUpdate').removeClass('invisible');
 
+            initializeFlash();
+            $('.flash').addClass('alert-info');
             $('.flash').html('<i class="fas fa-exclamation-circle"></i> ' + donnee['message'])
-            .fadeIn(300).delay(2500).fadeOut(300);
+                .fadeIn(300).delay(2500).fadeOut(300);
           }
           if (donnee['success'] === 'true') {
             $('#libelleUpdate').val("");
@@ -645,26 +662,54 @@
             $('#typeHelpUpdate').html("").addClass('invisible');
             $('#capaciteHelpUpdate').html("").addClass('invisible');
 
-            $('.flash').removeClass('alert-info').addClass('alert-success');
+            initializeFlash();
+            $('.flash').addClass('alert-success');
             $('.flash').html('<i class="fas fa-check"></i> ' + donnee['message'])
                 .fadeIn(300).delay(2500).fadeOut(300);
 
+            // Mise a jour de la ligne modifiée
+            const id = $('#idModif').val();
             $.ajax({
               type: "GET",
-              data: "getAll=" + true,
+              data: "idDetail=" + id,
               url: "controllers/batiments_controller.php",
               success: function (result) {
                 donnee = JSON.parse(result);
-                if (donnee['success'] === 'oui') {
-                  $('.table-data-body').html(donnee['batiment']);
+                if (donnee['batiment'] !== 'null') {
+                  const num = currentLine.children().first().text();
+                  const batiment = donnee['batiment'];
+                  $(currentLine).fadeIn("fast", function () {
+                    $(currentLine).remove();
+                    currentLine =
+                        '<tr>' +
+                        '<td>' + num + '</td>' +
+                        '<td>' + batiment['libelle'] + '</td>' +
+                        '<td>' + batiment['capacite'] + '</td>' +
+                        '<td>' + batiment['type'] + '</td>' +
+                        '<td>' + batiment['stock_actuel'] + '</td>' +
+                        '<td class="text-right">' +
+                        '<div class="btn-group-horizontal">' +
+                        '<a class="btn btn-info link-update-button mr-1" href="#" ' +
+                        'data-ligne-id="'+batiment['id']+'" data-bs-toggle="tooltip" title="Modifier">' +
+                        '<span class="fas fa-edit"></span></a>' +
+                        '<a class="btn btn-danger link-delete-button mr-1" href="#" ' +
+                        'data-ligne-id="'+batiment['id']+'" data-ligne-nom="'+batiment['libelle']+'" ' +
+                        'data-bs-toggle="tooltip" title="Supprimer le bâtiment"><span class="fas fa-trash"></span></a>' +
+                        '<a class="btn btn-warning link-close-campagne-button" href="#" ' +
+                        'data-ligne-id="'+batiment['id']+'" data-ligne-nom="'+batiment['libelle']+'" ' +
+                        'data-bs-toggle="tooltip" title="Fermer la campagne actuelle pour le bâtiment"><span class="fas fa-times"></span></a>' +
+                        '</div></td></tr>';
+                    $(".table-data-body").append(currentLine);
+                  });
                 }
               }
             });
           }
           if (donnee['success'] === 'non') {
-            $('.flash').removeClass('alert-info').addClass('alert-danger');
+            initializeFlash();
+            $('.flash').addClass('alert-danger');
             $('.flash').html('<i class="fas fa-exclamation-circle"></i> ' + donnee['message'])
-            .fadeIn(300).delay(2500).fadeOut(300);
+                .fadeIn(300).delay(2500).fadeOut(300);
           }
           if (donnee['success'] === 'false') {
             $('#libelleHelpUpdate').html(donnee['libelle']);
@@ -674,9 +719,10 @@
             $('#typeHelpUpdate').removeClass('invisible');
             $('#capaciteHelpUpdate').removeClass('invisible');
 
-            $('.flash').removeClass('alert-info').addClass('alert-danger');
+            initializeFlash();
+            $('.flash').addClass('alert-danger');
             $('.flash').html('<i class="fas fa-exclamation-circle"></i> Vérifiez les champs')
-            .fadeIn(300).delay(2500).fadeOut(300);
+                .fadeIn(300).delay(2500).fadeOut(300);
           }
         }
       });
